@@ -1,11 +1,11 @@
 # Clasificacion de generos musicales con Deep Learning
 
-Procesamientovy transformacion a espectrogramas de las ondas de sonido de las canciones (archivos en formato .mp3), para entrenar las distintas redes neuronales y poder asi predecir el género musical. 
+Procesamiento y transformacion a espectrogramas de las ondas de sonido de las canciones (archivos en formato .mp3), para entrenar las distintas redes neuronales y poder asi predecir el género musical. 
 
-Las arquitecturas deben adaptarse a la estructura de datos original del problema. Las canciones se representan en espectrogramas de dimensiones (LONG_SPECTO x BINS), donde LONG_SPECTO es la duración del track y BINS son arreglos que contienen las frecuencias que componen las ondas por cada LONG_SPECTO. En otras palabras, la calidad de audio.
-Por eso analizarlo en una estructura con mas dimensiones es mejor que hacerlo en arreglos planos.
+Las arquitecturas deben adaptarse a la estructura de datos original del problema. Las canciones se representan en espectrogramas de dimensiones (LONG_SPECTO x BINS), donde LONG_SPECTO es la duración del track y BINS son arreglos que contienen las frecuencias que componen las ondas. En otras palabras, la calidad de audio.
+Por eso analizarlo en una estructura con mas de una dimension es mejor que hacerlo en arreglos planos.
 
-Las arquitecturas del repositorio FMA no presentan buenos resultados... son planas y convolucionales
+Las arquitecturas del repositorio FMA no presentan buenos resultados... son planas y convolucionales.
 La mejora está determinada por la aplicaion de distintas estructuras recurrentes RNN: Bloques de aprendizaje LSTM o GRU. 
 Este espacio extra de almacenamiento tiene mucha utilidad ya que puede guardar distintos patrones cortos que presentan las canciones.
 
