@@ -20,10 +20,12 @@ La música al ser intrínsecamente matemática, genera patrones de distintos tip
 
 ### Preprocesamiento - Analisis de espectrogramas
 
+```py
 conda create -n envAudio python
-
+```
+```py
 pip install -r requerimientos.txt
-
+```
 
 El procesamiento de las ondas de sonido (formato .wav) se realiza mediante la transformada de fourier a espectrogramas. En este caso, el dataset FMA tiene archivos .mp3, más comprimidos que .wav
 Un espectrograma representa las frecuencias (en Hertz) que componen ondas de sonido a lo largo del tiempo.
@@ -52,7 +54,9 @@ Los resultados del modelo parecen muy buenos, con una precision por subgenero de
 
 Pero podemos ver el humo en el grafico..
 
-imagenes 
+![CRNN_acc](/imagenes/CRNN_acc-val_acc.jpg)
+
+![CRNN_loss](/imagenes/CRNN_loss-val_loss.jpg)
 
 
 https://arxiv.org/pdf/1712.08370.pdf
@@ -67,7 +71,10 @@ Un modelo convolucional 2D en paralelo con estos espacios de almacenamiento arro
 Este ultimo modelo minimizan el error y ofrece predicciones similares a las de entrenamiento.
 loss=1.856, acc=0.3212, top3=0.6737
 
-fotos de resultados
+![CNN-RNN_acc](/imagenes/CNN-RNN_acc-val_acc.jpg)
+
+![CNN-RNN_loss](/imagenes/CNN-RNN_loss-val_loss.jpg)
+
 
 https://arxiv.org/pdf/1609.04243.pdf
 
@@ -79,6 +86,6 @@ Como en todo, hay underfitting porque no tengo suficiente data ni recursos compu
 El objetivo final es generar una secuencia de ondas de sonido con lo aprendido por el algoritmo.
 Los LSTM aprenden y decodifican informacion pero no ‘crean’ nuevos datos.
 Las arquitecturas de redes neuronales generativas (GAN’s) serian lo mas eficiente para este objetivo.
-Agregando una cancion en el discriminante y otra cancion totalmente diferente por el generador podria llegar a generar algo interesante.
+Agregando una cancion en el discriminante y otra cancion totalmente diferente por el generador podria llegar a generar algo interesante...
 
 
