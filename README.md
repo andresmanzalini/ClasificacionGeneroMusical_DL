@@ -9,9 +9,9 @@ Las arquitecturas del repositorio FMA no presentan buenos resultados... son plan
 La mejora está determinada por la aplicaion de distintas estructuras recurrentes RNN: Bloques de aprendizaje LSTM o GRU. 
 Este espacio extra de almacenamiento tiene mucha utilidad ya que puede guardar distintos patrones cortos que presentan las canciones.
 
-El modelo secuencial CRNN con LSTM de X espacios de almacenamiento mejora los resultados de FMA, pero con muchos valores extremos. Camufla los valores de predicción finales con Dropout y Regularización, y parece entrenar muy bien pero los valores predichos distan de los reales.
+El modelo secuencial CRNN con LSTM de 64 espacios de almacenamiento mejora los resultados de FMA, pero con valores extremos. Camufla los valores de predicción finales con Dropout y Regulación, y parece entrenar muy bien pero los valores predichos distan de los reales.
  
-El modelo paralelo CNN-RNN con GRU(Gated Recurrent Unit) Bidireccional de W bloques de aprendizaje es el que da mejores resultados, con una precisión por subgénero de un ~.33, y una predicción por género de un ~.70
+El modelo paralelo CNN-RNN con GRU(Gated Recurrent Unit) Bidireccional de 32 bloques de aprendizaje es el que da mejores resultados porque los resultados predichos son cercanos a los de entrenamiento, con algunos resultados extremos. con una precisión por subgénero de un ~.32, y una predicción por género de un ~.68
 
 
 La música al ser intrínsecamente matemática, genera patrones de distintos tipos. Relacionado a la armonía podemos encontrarlo en las escalas; en el ritmo se presenta en los compases; la melodía en algunos casos se sale un poco de la estructura, pero en las canciones ‘estructuradas’ es muy probable encontrar un patrón.
@@ -35,7 +35,7 @@ En este caso la frecuencia de muestreo es 44100Hertz, quantization=128 bins y ho
 
 ### Generador como Archivos mapeados a memoria
 
-Hace todo el preprocesamiento de los espectrogramas a arreglos numpy de dimensión LONG_SPECTO x BINS y guarda la primera parte de esa informacion en un archivo .dat para efectuar un mapeo de memoria.
+Hace todo el preprocesamiento de los espectrogramas a arreglos numpy de dimensión LONG_SPECTO x BINS y guarda una parte de esa informacion en un archivo .dat para efectuar un mapeo a memoria virtual.
 
 Es más eficiente que guardarlo de forma estática en disco, ya que al estar en memoria compartida exprime al máximo el paralelismo interno de la pc y minimiza el espacio de almacenamiento. 
 
@@ -45,13 +45,15 @@ Esta técnica maximiza el uso de la RAM y devuelve buenos resultados desde la pe
 
 ### CRNN - Convolutional Recurrent Neural Network 
 
-Modelo Conv1D que implementa LSTM. Tiene mejor respuesta computacional que el paralelo. Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
-Este modelo arroja resultados aceptables, de un
+Modelo Conv1D que implementa LSTM. Tiene buena respuesta computacional. Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
 Una desventaja es que esta muy camuflado con Dropout y Regularizacion en todas las capas. Eso hace que los valores de aprendizaje reales disten de los predichos. 	
 
-resultados del primer modelo
+Los resultados del modelo parecen muy buenos, con una precision por subgenero de .423, por genero de un .735 y con un error de un 1.92 
 
-imagenes y matriz confusion
+Pero podemos ver el humo en el grafico..
+
+imagenes 
+
 
 https://arxiv.org/pdf/1712.08370.pdf
 
@@ -60,10 +62,12 @@ https://arxiv.org/pdf/1712.08370.pdf
 ### CNN-RNN - Parallel Convolutional-Recurrent Neural Netowrk
 
 Este modelo combina la estructura de datos LSTM Bidireccional en un GRU (Gated Recurrent Unit), que almacena mas informacion que LSTM y filtra la informacion a guardar mediante sus puertas (Gates). 
-La paralelizacion de un modelo convolucional 2D y en paralelo estos espacios de almacenamiento arrojan los mejores resultados a la hora de clasificar canciones segun su genero musical.
-Estos ultimos modelos minimizan el error y ofrece predicciones con 50% precision
+Un modelo convolucional 2D en paralelo con estos espacios de almacenamiento arrojan los resultados mas consistentes a la hora de clasificar canciones segun su genero musical.
 
-fotos de resultados y matriz confusion
+Este ultimo modelo minimizan el error y ofrece predicciones similares a las de entrenamiento.
+loss=1.856, acc=0.3212, top3=0.6737
+
+fotos de resultados
 
 https://arxiv.org/pdf/1609.04243.pdf
 
