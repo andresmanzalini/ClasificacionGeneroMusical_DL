@@ -2,19 +2,19 @@
 
 Procesamiento y transformacion a espectrogramas de las ondas de sonido de las canciones (archivos en formato .mp3), para entrenar las distintas redes neuronales y poder asi predecir el género musical. 
 
-Las arquitecturas deben adaptarse a la estructura de datos original del problema. Las canciones se representan en espectrogramas de dimensiones (LONG_SPECTO x BINS), donde LONG_SPECTO es la duración del track y BINS son arreglos que contienen las frecuencias que componen las ondas. En otras palabras, la calidad de audio.
-Por eso analizarlo en una estructura con mas de una dimension es mejor que hacerlo en arreglos planos.
+Las arquitecturas deben adaptarse a la estructura de datos original del problema. 
+Las canciones se representan en espectrogramas de dimensiones (LONG_SPECTO x BINS), donde LONG_SPECTO es la duración del track y BINS son arreglos que contienen las frecuencias que componen las ondas. En otras palabras, la calidad de audio.
+
 
 Las arquitecturas del repositorio FMA no presentan buenos resultados... son planas y convolucionales.
-La mejora está determinada por la aplicaion de distintas estructuras recurrentes RNN: Bloques de aprendizaje LSTM o GRU. 
+La mejora está determinada por la utilizacion de distintas estructuras recurrentes RNN: Bloques de aprendizaje LSTM o GRU. 
+
 Este espacio extra de almacenamiento tiene mucha utilidad ya que puede guardar distintos patrones cortos que presentan las canciones.
+
 
 El modelo secuencial CRNN con LSTM de 64 espacios de almacenamiento mejora los resultados de FMA, pero con valores extremos. Camufla los valores de predicción finales con Dropout y Regulación, y parece entrenar muy bien pero los valores predichos distan de los reales.
  
 El modelo paralelo CNN-RNN con GRU(Gated Recurrent Unit) Bidireccional de 32 bloques de aprendizaje es el que da mejores resultados porque los resultados predichos son cercanos a los de entrenamiento, con algunos resultados extremos. con una precisión por subgénero de un ~.32, y una predicción por género de un ~.68
-
-
-La música al ser intrínsecamente matemática, genera patrones de distintos tipos. Relacionado a la armonía podemos encontrarlo en las escalas; en el ritmo se presenta en los compases; la melodía en algunos casos se sale un poco de la estructura, pero en las canciones ‘estructuradas’ es muy probable encontrar un patrón.
 
 
 
@@ -29,8 +29,12 @@ pip install -r requerimientos.txt
 
 El procesamiento de las ondas de sonido (formato .wav) se realiza mediante la transformada de fourier a espectrogramas. En este caso, el dataset FMA tiene archivos .mp3, más comprimidos que .wav
 Un espectrograma representa las frecuencias (en Hertz) que componen ondas de sonido a lo largo del tiempo.
+
+![spectro](/imagenes/spectrograma.jpg)
+
 Distintos parámetros como la frecuencia de muestreo (sampling rate 44100 Hertz o 22.5kHz) y la calidad del audio (quantization, arreglos de 128 o 256 frecuencias) permiten adaptar el espectrograma al modelo, según sus requisitos. El parámetro correspondiente a ventana deslizante (hop length) se utiliza para procesar de a partes el espectrograma.
 Para analizar el género musical, con valores standard de sampling rate y calidad de audio podemos lograr el objetivo de clasificar las canciones según sus espectrogramas.
+
 En este caso la frecuencia de muestreo es 44100Hertz, quantization=128 bins y hop_length=1024 (ventana de 15s, divido el track de 30s en 2 partes).
 
 
@@ -68,7 +72,7 @@ https://arxiv.org/pdf/1712.08370.pdf
 Este modelo combina la estructura de datos LSTM Bidireccional en un GRU (Gated Recurrent Unit), que almacena mas informacion que LSTM y filtra la informacion a guardar mediante sus puertas (Gates). 
 Un modelo convolucional 2D en paralelo con estos espacios de almacenamiento arrojan los resultados mas consistentes a la hora de clasificar canciones segun su genero musical.
 
-Este ultimo modelo minimizan el error y ofrece predicciones similares a las de entrenamiento.
+Este ultimo modelo achica el error y ofrece predicciones similares a las de entrenamiento.
 loss=1.856, acc=0.3212, top3=0.6737
 
 ![CNN-RNN_acc](/imagenes/CNN-RNN_acc-val_acc.jpg)
@@ -80,11 +84,12 @@ https://arxiv.org/pdf/1609.04243.pdf
 
 
 
-Como en todo, hay underfitting porque no tengo suficiente data ni recursos computacionales. 
+Hay underfitting por la falta de data y recursos computacionales. 
 
 
 El objetivo final es generar una secuencia de ondas de sonido con lo aprendido por el algoritmo.
-Los LSTM aprenden y decodifican informacion pero no ‘crean’ nuevos datos.
+Los LSTM aprenden y decodifican informacion pero no ‘crean’ nuevos datos...
+
 Las arquitecturas de redes neuronales generativas (GAN’s) serian lo mas eficiente para este objetivo.
 Agregando una cancion en el discriminante y otra cancion totalmente diferente por el generador podria llegar a generar algo interesante...
 
