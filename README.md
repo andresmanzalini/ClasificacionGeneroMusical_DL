@@ -1,9 +1,9 @@
-# Clasificacion de generos musicales con Deep Learning
+# Clasificacion de genero musical con Deep Learning
 
-Procesamiento y transformacion a espectrogramas de las ondas de sonido de las canciones (archivos en formato .mp3), para entrenar las distintas redes neuronales y poder asi predecir el género musical. 
+Este proyecto consiste en el procesamiento y transformacion de canciones en formato .mp3 a espectrogramas (la representacion del sonido en frecuencias). De esta manera es posible entrenar distintas redes neuronales y predecir el género musical de la canciones .mp3 
 
-Las arquitecturas deben adaptarse a la estructura de datos original del problema. 
-Las canciones se representan en espectrogramas de dimensiones (LONG_SPECTO x BINS), donde LONG_SPECTO es la duración del track y BINS son arreglos que contienen las frecuencias que componen las ondas. En otras palabras, la calidad de audio.
+Las arquitecturas de las redes neuronales deben adaptarse a la estructura de datos original del problema: el espectrograma. 
+Laos fragmentos de canciones se representan en espectrogramas de dimensiones (LONG_SPECTO x BINS), donde LONG_SPECTO es la duración del track y BINS son arreglos que contienen las frecuencias que componen las ondas. Es decir, por cada unidad de tiempo, contiene la informacion en frecuencias (Hertz). La dimension de BINS representa la calidad de audio.
 
 
 Las arquitecturas del repositorio FMA no presentan buenos resultados... son planas y convolucionales.
@@ -14,7 +14,10 @@ Este espacio extra de almacenamiento tiene mucha utilidad ya que puede guardar d
 
 El modelo secuencial CRNN con LSTM de 64 espacios de almacenamiento mejora los resultados de FMA, pero con valores extremos. Camufla los valores de predicción finales con Dropout y Regulación, y parece entrenar muy bien pero los valores predichos distan de los reales.
  
-El modelo paralelo CNN-RNN con GRU(Gated Recurrent Unit) Bidireccional de 32 bloques de aprendizaje es el que da mejores resultados porque los resultados predichos son cercanos a los de entrenamiento, con algunos resultados extremos. con una precisión por subgénero de un ~.32, y una predicción por género de un ~.68
+El modelo paralelo CNN-RNN con GRU(Gated Recurrent Unit) Bidireccional de 32 bloques de aprendizaje es el que da mejores resultados. Los resultados de prediccion son cercanos a los de entrenamiento, con algunos resultados extremos. 
+
+
+La precision de prediccion por genero es de ~.68 , y por subgénero de un ~.32 
 
 
 
@@ -33,15 +36,17 @@ Un espectrograma representa las frecuencias (en Hertz) que componen ondas de son
 ![spectro](/imagenes/spectrograma.jpg)
 
 Distintos parámetros como la frecuencia de muestreo (sampling rate 44100 Hertz o 22.5kHz) y la calidad del audio (quantization, arreglos de 128 o 256 frecuencias) permiten adaptar el espectrograma al modelo, según sus requisitos. El parámetro correspondiente a ventana deslizante (hop length) se utiliza para procesar de a partes el espectrograma.
+
 Para analizar el género musical, con valores standard de sampling rate y calidad de audio podemos lograr el objetivo de clasificar las canciones según sus espectrogramas.
 
-En este caso la frecuencia de muestreo es 44100Hertz, quantization=128 bins y hop_length=1024 (ventana de 15s, divido el track de 30s en 2 partes).
+
+Los parametros importantes para el procesamiento de la data son frecuencia de muestreo de 44100Hertz, quantization de 128 bins y hop_length=1024 (ventana de 15s, divido el track de 30s en 2 partes).
 
 
 
 ### Generador como Archivos mapeados a memoria
 
-Hace todo el preprocesamiento de los espectrogramas a arreglos numpy de dimensión LONG_SPECTO x BINS y guarda una parte de esa informacion en un archivo .dat para efectuar un mapeo a memoria virtual.
+Hace todo el preprocesamiento de los espectrogramas a arreglos numpy de dimensión LONG_SPECTO x BINS , y guarda una parte de esa informacion en un archivo .dat para efectuar un mapeo a memoria virtual.
 
 Es más eficiente que guardarlo de forma estática en disco, ya que al estar en memoria compartida exprime al máximo el paralelismo interno de la pc y minimiza el espacio de almacenamiento. 
 
