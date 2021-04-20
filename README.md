@@ -1,4 +1,4 @@
-# Clasificacion de genero musical con Deep Learning
+# Clasificacion de Género Musical con Deep Learning
 
 Este proyecto consiste en el procesamiento y transformacion de canciones en formato .mp3 a espectrogramas (la representacion del sonido en frecuencias). De esta manera es posible entrenar distintas redes neuronales y predecir el género musical de la canciones .mp3 
 
@@ -12,16 +12,16 @@ La mejora está determinada por la utilizacion de distintas estructuras recurren
 Este espacio extra de almacenamiento tiene mucha utilidad ya que puede guardar distintos patrones cortos que presentan las canciones.
 
 
-El modelo secuencial CRNN con LSTM de 64 espacios de almacenamiento mejora los resultados de FMA, pero con valores extremos. Camufla los valores de predicción finales con Dropout y Regulación, y parece entrenar muy bien pero los valores predichos distan de los reales.
+El modelo secuencial CRNN con LSTM de 64 espacios de almacenamiento mejora los resultados de FMA. Camufla los valores de predicción finales con Dropout y Regulación, y parece entrenar muy bien pero los valores predichos distan de los reales.
  
 El modelo paralelo CNN-RNN con GRU(Gated Recurrent Unit) Bidireccional de 32 bloques de aprendizaje es el que da mejores resultados. Los resultados de prediccion son cercanos a los de entrenamiento, con algunos resultados extremos. 
 
 
-La precision de prediccion por genero es de ~.68 , y por subgénero de un ~.32 
+Los mejores resultados los presenta el modelo secuencial CRNN , con precision de 0.82 por genero
 
 
 
-### Preprocesamiento - Analisis de espectrogramas
+### Preprocesamiento - Análisis de espectrogramas
 
 ```py
 conda create -n envAudio python
@@ -56,17 +56,28 @@ Esta técnica maximiza el uso de la RAM y devuelve buenos resultados desde la pe
 
 ### CRNN - Convolutional Recurrent Neural Network 
 
-Modelo Conv1D que implementa LSTM. Tiene buena respuesta computacional. Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
-Una desventaja es que esta muy camuflado con Dropout y Regularizacion en todas las capas. Eso hace que los valores de aprendizaje reales disten de los predichos. 	
+Modelo que implementa LSTM. Tiene buena respuesta computacional. Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
 
-Los resultados del modelo parecen muy buenos, con una precision por subgenero de .423, por genero de un .735 y con un error de un 1.92 
+Los resultados del modelo parecen aceptables, con precision por genero de un .82 y con un error alto de 0.6
 
-Pero podemos ver el humo en el grafico..
+Pero podemos verlo en el grafico..
 
 ![CRNN_acc](/imagenes/CRNN_acc-val_acc.jpg)
 
 ![CRNN_loss](/imagenes/CRNN_loss-val_loss.jpg)
 
+
+La matriz de confusion
+
+![CRNN_matconf](/imagenes/CRNN_matconfusion.jpg)
+
+
+Prediccion del modelo
+
+aca pongo el pipe con el resultado
+
+
+Fuente:
 
 https://arxiv.org/pdf/1712.08370.pdf
 
@@ -85,11 +96,14 @@ loss=1.856, acc=0.3212, top3=0.6737
 ![CNN-RNN_loss](/imagenes/CNN-RNN_loss-val_loss.jpg)
 
 
+
+Fuente:
+
 https://arxiv.org/pdf/1609.04243.pdf
 
 
 
-Hay underfitting por la falta de data y recursos computacionales. 
+Con el dataset medium mejoran los datos, pero sigue habiendo underfiting por la falta de data
 
 
 El objetivo final es generar una secuencia de ondas de sonido con lo aprendido por el algoritmo.
