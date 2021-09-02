@@ -29,6 +29,7 @@ El modelo paralelo CNN-RNN con GRU(Gated Recurrent Unit) Bidireccional de 32 blo
 Hasta el momento, los mejores resultados los presenta el modelo secuencial CRNN , con precision de 0.82 por genero
 
 
+<br />
 
 
 ### Preprocesamiento - Análisis de espectrogramas
@@ -58,6 +59,8 @@ Para clasificar los espectrogramas segun su género musical se usaran valores st
 Los parametros importantes para el procesamiento de la data son frecuencia de muestreo de 44100Hertz, quantization de 128 bins y hop_length=1024 (ventana de 15s, divido el track de 30s en 2 partes).
 
 
+<br />
+
 
 ### Generador como Archivos mapeados a memoria
 
@@ -76,6 +79,7 @@ Es más eficiente que guardarlo de forma estática en disco, ya que al estar en 
 Esta técnica maximiza el uso de la RAM y devuelve buenos resultados desde la perspectiva *carga_computacional-tiempo_ejecucion*, a costa de una posible saturacion de memoria sin los parametros adecuados.
 
 
+<br />
 
 
 ## Modelos
@@ -106,6 +110,7 @@ La matriz de confusion
 https://arxiv.org/pdf/1712.08370.pdf
 
 
+<br />
 
 
 ### CNN-RNN - Parallel Convolutional-Recurrent Neural Netowrk
@@ -128,6 +133,8 @@ El problema es que se estanca el error, en un .6
 
 https://arxiv.org/pdf/1609.04243.pdf
 
+
+<br />
 
 
 ### Conclusiones
