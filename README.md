@@ -87,12 +87,17 @@ Esta técnica maximiza el uso de la RAM y devuelve buenos resultados desde la pe
 ### CRNN - Convolutional Recurrent Neural Network 
 
 Modelo secuencial. 
+
 Implementa LSTM. 
+
 Tiene buena respuesta computacional. 
+
 Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
 
 ![arqui_secuencial](/imagenes/arquitectura_secuencial.png)
 
+
+<br />
 
 Los resultados del modelo son aceptables, con precision por genero de un .82 pero con un error alto de 0.6
 
@@ -124,6 +129,9 @@ Combina la estructura de datos LSTM Bidireccional en un GRU (Gated Recurrent Uni
 Utiliza un modelo convolucional 2D en paralelo con estos espacios de almacenamiento (GRU) 
 
 ![arqui_paralela](/imagenes/arquitectura_paralela.png)
+
+
+<br />
 
 
 Arroja resultados mas consistentes a la hora de clasificar canciones segun su genero musical.
