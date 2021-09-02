@@ -91,6 +91,9 @@ Implementa LSTM.
 Tiene buena respuesta computacional. 
 Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
 
+![arqui_secuencial](/imagenes/arquitectura_secuencial.jpg)
+
+
 Los resultados del modelo son aceptables, con precision por genero de un .82 pero con un error alto de 0.6
 
 
@@ -111,6 +114,7 @@ https://arxiv.org/pdf/1712.08370.pdf
 
 
 <br />
+<br />
 
 
 ### CNN-RNN - Parallel Convolutional-Recurrent Neural Netowrk
@@ -118,6 +122,9 @@ https://arxiv.org/pdf/1712.08370.pdf
 Modelo paralelo.
 Combina la estructura de datos LSTM Bidireccional en un GRU (Gated Recurrent Unit), que almacena mas informacion que LSTM y filtra la informacion a guardar mediante sus puertas (Gates). 
 Utiliza un modelo convolucional 2D en paralelo con estos espacios de almacenamiento (GRU) 
+
+![arqui_paralela](/imagenes/arquitectura_paralela.jpg)
+
 
 Arroja resultados mas consistentes a la hora de clasificar canciones segun su genero musical.
 
@@ -134,6 +141,7 @@ El problema es que se estanca el error, en un .6
 https://arxiv.org/pdf/1609.04243.pdf
 
 
+<br />
 <br />
 
 
