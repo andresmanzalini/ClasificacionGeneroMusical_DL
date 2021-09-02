@@ -103,22 +103,23 @@ Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
 Los resultados del modelo son aceptables, con precision por genero de un .82 pero con un error alto de 0.6
 
 
-![CRNN_acc](/imagenes/CRNN_acc-val_acc.jpg)
+![CRNN_acc](/imagenes/CRNN_medium_acc-val_acc_100epochs.jpg)
 
-![CRNN_loss](/imagenes/CRNN_loss-val_loss.jpg)
+![CRNN_loss](/imagenes/CRNN_medium_loss-val_loss_100epochs.jpg)
 
 
 <br />
 
 Los resultados se pueren apreciar en la matriz de confusion
 
-![CRNN_matconf](/imagenes/CRNN_matconfusion.jpg)
+![CRNN_matconf](/imagenes/matriz_confusion_CRNN_medium_100epochs.jpg)
 
-
+<br />
 
 #### Referencia
 
 https://arxiv.org/pdf/1609.04243.pdf
+
 
 
 <br />
@@ -146,10 +147,17 @@ Arroja resultados mas consistentes a la hora de clasificar canciones segun su ge
 La precision es buena e incremental, de un .82
 El problema es que se estanca el error, en un .6
 
-![CNN-RNN_acc](/imagenes/CNN-RNN_acc-val_acc.jpg)
+![CNN-RNN_acc](/imagenes/CNN_RNN_medium_acc-val_acc_100epochs.jpg)
 
-![CNN-RNN_loss](/imagenes/CNN-RNN_loss-val_loss.jpg)
+![CNN-RNN_loss](/imagenes/CNN_RNN_medium_loss-val_loss_100epochs.jpg)
 
+<br />
+
+Los resultados se pueren apreciar en la matriz de confusion
+
+![CRNN_matconf](/imagenes/matriz_confusion_CNN_RNN_medium_100epochs.jpg)
+
+<br />
 
 #### Referencia
 
