@@ -115,7 +115,7 @@ La matriz de confusion
 
 ##### Referencia
 
-https://arxiv.org/pdf/1712.08370.pdf
+https://arxiv.org/pdf/1609.04243.pdf
 
 
 <br />
@@ -125,8 +125,11 @@ https://arxiv.org/pdf/1712.08370.pdf
 ### CNN-RNN - Parallel Convolutional-Recurrent Neural Netowrk
 
 Modelo paralelo.
+
 Combina la estructura de datos LSTM Bidireccional en un GRU (Gated Recurrent Unit), que almacena mas informacion que LSTM y filtra la informacion a guardar mediante sus puertas (Gates). 
+
 Utiliza un modelo convolucional 2D en paralelo con estos espacios de almacenamiento (GRU) 
+
 
 ![arqui_paralela](/imagenes/arquitectura_paralela.png)
 
@@ -146,7 +149,7 @@ El problema es que se estanca el error, en un .6
 
 ##### Referencia
 
-https://arxiv.org/pdf/1609.04243.pdf
+https://arxiv.org/pdf/1712.08370.pdf
 
 
 <br />
