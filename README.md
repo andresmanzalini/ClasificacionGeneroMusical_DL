@@ -94,8 +94,9 @@ Tiene buena respuesta computacional.
 
 Es una gran mejora respecto a los modelos sin celdas de almacenamiento extra.
 
-![arqui_secuencial](/imagenes/arquitectura_secuencial.png)
+<br />
 
+![arqui_secuencial](/imagenes/arquitectura_secuencial.png)
 
 <br />
 
@@ -107,13 +108,15 @@ Los resultados del modelo son aceptables, con precision por genero de un .82 per
 ![CRNN_loss](/imagenes/CRNN_loss-val_loss.jpg)
 
 
-La matriz de confusion
+<br />
+
+Los resultados se pueren apreciar en la matriz de confusion
 
 ![CRNN_matconf](/imagenes/CRNN_matconfusion.jpg)
 
 
 
-##### Referencia
+#### Referencia
 
 https://arxiv.org/pdf/1609.04243.pdf
 
@@ -130,6 +133,7 @@ Combina la estructura de datos LSTM Bidireccional en un GRU (Gated Recurrent Uni
 
 Utiliza un modelo convolucional 2D en paralelo con estos espacios de almacenamiento (GRU) 
 
+<br />
 
 ![arqui_paralela](/imagenes/arquitectura_paralela.png)
 
@@ -147,7 +151,7 @@ El problema es que se estanca el error, en un .6
 ![CNN-RNN_loss](/imagenes/CNN-RNN_loss-val_loss.jpg)
 
 
-##### Referencia
+#### Referencia
 
 https://arxiv.org/pdf/1712.08370.pdf
 
